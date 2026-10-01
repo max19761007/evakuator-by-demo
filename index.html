@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow" data-publish>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Эвакуатор в {{город}} – цену называем до выезда</title>
+<meta name="description" content="Эвакуатор в {{город}}: один звонок – и вы знаете цену и время подачи. На месте цена не меняется, колёса на ремнях. Легковые, кроссоверы, микроавтобусы до 3,5 т.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_BY">
+<meta property="og:site_name" content="{{компания}}">
+<meta property="og:title" content="Эвакуатор в {{город}} – цену называем до выезда">
+<meta property="og:description" content="Позвоните и скажите, где стоит машина: назовём цену и время подачи. На месте цена не меняется.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/hero-m.webp" media="(max-width: 860px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero.webp" media="(min-width: 861px)" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/unbounded-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2711%27 fill=%27none%27 stroke=%27%23f2a93b%27 stroke-width=%276%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vibe.css">
+<style>
+  /* ---- тема: палитра А «Янтарь» ------------------------------------------ */
+  html, body { background: #0b0d11; }
+  .v-page {
+    --v-canvas: #0b0d11; --v-surface: #141821;
+    --v-ink: #f1ede4; --v-ink-soft: #9d9a92;
+    --v-accent: #f2a93b; --v-accent-ink: #16110a;
+    --v-font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+    --v-font-text: "Manrope", "Segoe UI", system-ui, sans-serif;
+    --v-shadow-color: 4 6 12;
+  }
+
+  /* слоты демо: пунктир – данные, которые даст заказчик */
+  .slot { text-decoration: underline dotted rgb(242 169 59 / .6); text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
+
+  /* ---- шапка ---------------------------------------------------------------- */
+  .bar { position: fixed; inset: 0 0 auto 0; z-index: 30; display: flex; align-items: center; justify-content: space-between;
+    padding: var(--v-3) var(--v-gutter); gap: var(--v-4);
+    background: linear-gradient(to bottom, rgb(11 13 17 / .85), rgb(11 13 17 / 0));
+    transition: background-color .3s var(--v-ease-out), box-shadow .3s var(--v-ease-out); }
+  .bar.is-scrolled { background: rgb(11 13 17 / .8); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--v-hair); }
+  .bar__mark { font-family: var(--v-font-display); font-weight: 700; font-size: var(--v-t-sm); letter-spacing: .02em; text-decoration: none;
+    display: inline-flex; align-items: center; gap: .55em; min-height: 44px; white-space: nowrap; }
+  .bar__mark i { width: .9em; height: .9em; border-radius: 50%; border: .22em solid var(--v-accent); display: inline-block; animation: beacon 1.6s steps(2, jump-none) infinite; }
+  @keyframes beacon { 50% { border-color: rgb(242 169 59 / .3); } }
+  .bar__right { display: flex; align-items: center; gap: var(--v-4); }
+  .bar__tel { text-decoration: none; font-weight: 600; font-size: var(--v-t-sm); display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--v-2); }
+  @media (max-width: 700px) {
+    .bar__tel { display: none; }
+    .bar .v-btn { padding: 0 1em; min-height: 44px; font-size: .8rem; }
+    .bar__mark { font-size: .85rem; }
+  }
+  @media (max-width: 860px) { .bar.is-scrolled { background: rgb(11 13 17 / .96); } }
+
+  /* ---- hero: два плана ------------------------------------------------------ */
+  .hero__back img, .hero__card img { position: absolute; max-width: none; }
+  .hero__back img { width: 118%; height: 118%; left: -9%; top: -9%; object-fit: cover; object-position: 60% 50%; }
+  .hero__card { --w: clamp(170px, 15vw, 250px); }
+  .hero__card img { width: var(--w); height: auto; right: clamp(2rem, 5vw, 6rem); bottom: clamp(3rem, 10vh, 7rem);
+    border-radius: var(--v-radius); transform: rotate(3deg);
+    box-shadow: 0 30px 50px rgb(0 0 0 / .6), 0 0 0 1px rgb(242 169 59 / .25); }
+  .hero__floor { position: absolute; inset: auto 0 0 0; height: 36%; z-index: 2; pointer-events: none;
+    background: linear-gradient(to top, var(--v-canvas) 0%, rgb(11 13 17 / .6) 45%, transparent 100%); }
+  .hero__copy { bottom: clamp(4rem, 13vh, 9rem); max-width: min(44rem, 88vw); }
+  .demo-for { display: inline-flex; align-items: center; gap: .5em; font-size: var(--v-t-xs); color: var(--v-ink-soft);
+    background: rgb(20 24 33 / .85); box-shadow: inset 0 0 0 1px var(--v-hair); border-radius: var(--v-radius); padding: .35em .75em; margin-bottom: var(--v-5); }
+  .hero__copy .v-display { font-size: min(var(--v-t-3xl), 8vh); line-height: .98; }
+  .hero__copy .v-lede { margin-top: var(--v-5); color: var(--v-ink); opacity: .9; max-width: 40ch; }
+  .hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--v-3) var(--v-5); margin-top: var(--v-6); }
+  /* главная кнопка ТЗ: крупная, с номером */
+  .call { min-height: 4rem; padding: 0 1.8em; font-size: var(--v-t-base); gap: .7em; }
+  .call svg { width: 1.25em; height: 1.25em; flex: none; }
+  .hero__num { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+  .hero__note { position: absolute; z-index: 3; right: var(--v-gutter); top: clamp(5rem, 12vh, 7rem); text-align: right; display: grid; gap: .3em; font-size: var(--v-t-sm); }
+  .hero__note b { font-weight: 600; }
+  @media (max-width: 860px) {
+    .hero__card { --w: 30vw; }
+    .hero__card img { right: 5vw; top: 12svh; bottom: auto; }
+    .hero__note { display: none; }
+    .hero__copy { bottom: clamp(5.5rem, 13svh, 7rem); }
+    .hero__copy .v-display { font-size: var(--v-t-2xl); }
+    .hero__copy .v-lede { font-size: var(--v-t-base); }
+    .hero__num { display: none; }
+    .demo-for__order { display: none; }
+    .demo-for { margin-bottom: var(--v-3); }
+  }
+
+  /* ---- фирменный ход: шкала «один звонок» ---------------------------------- */
+  .route { display: grid; grid-template-rows: 1fr auto auto; grid-template-columns: 1.3fr 1fr; column-gap: var(--v-8); height: 100%;
+    padding: clamp(4rem, 12vh, 7rem) var(--v-gutter) clamp(3rem, 12vh, 8rem); }
+  .route__copy { align-self: center; display: grid; max-width: 40rem; }
+  .route__copy > div { grid-area: 1 / 1; }
+  .route__copy .v-display { margin-bottom: var(--v-4); }
+  .route__copy .v-body { color: var(--v-ink-soft); max-width: 36rem; }
+  .route__copy .v-body b { color: var(--v-ink); font-weight: 600; }
+  .route__big { align-self: center; justify-self: end; text-align: right; }
+  .route__big .big { font-family: var(--v-font-display); font-weight: 700; font-size: clamp(3rem, 6.2vw, 6.4rem); line-height: .9; letter-spacing: -.04em; white-space: nowrap;
+    color: transparent; -webkit-text-stroke: 2px rgb(242 169 59 / .6); display: block; }
+  .route__big .v-label { display: block; margin-top: var(--v-3); max-width: 16rem; margin-left: auto; line-height: 1.4; }
+  .route .scale { grid-column: 1 / -1; }
+  .route__after { grid-column: 1 / -1; padding-top: var(--v-5); display: flex; justify-content: flex-end; }
+  .scale { position: relative; height: 6.6rem; --edge: 10%; }
+  .scale__line { position: absolute; left: var(--edge); right: var(--edge); top: 2.25rem; height: 1px; background: var(--v-hair-strong); }
+  .scale__fill { position: absolute; left: var(--edge); top: 2.25rem; height: 2px; margin-top: -.5px; background: var(--v-accent); width: calc(var(--v-p, 0) * (100% - 2 * var(--edge))); }
+  .scale__steps { display: grid; grid-template-columns: repeat(5, 1fr); position: absolute; inset: 0; }
+  .scale__steps li { position: relative; padding-top: 4.1rem; text-align: center; font-size: var(--v-t-sm); color: var(--v-ink-soft); transition: color .3s; }
+  .scale__steps li::before { content: ""; position: absolute; left: 50%; top: 1.75rem; width: 1px; height: 1rem; background: var(--v-hair-strong); }
+  .scale__steps li.is-past { color: var(--v-ink); }
+  .scale__steps li.is-past::before { background: var(--v-accent); }
+  /* маячок: колесо крутится, ореол мигает */
+  .scale__mark { position: absolute; top: 2.25rem; left: calc(var(--edge) + var(--v-p, 0) * (100% - 2 * var(--edge))); width: 2.6rem; height: 2.6rem; margin: -1.3rem 0 0 -1.3rem;
+    border-radius: 50%; border: .45rem solid var(--v-accent); background: var(--v-canvas);
+    box-shadow: 0 0 0 .35rem var(--v-canvas), 0 0 28px rgb(242 169 59 / .45);
+    transform: rotate(calc(var(--v-p, 0) * 900deg)); }
+  .scale__mark::after { content: ""; position: absolute; inset: .3rem; border-radius: 50%; border: 1px dashed rgb(242 169 59 / .6); }
+  @media (max-width: 860px) {
+    .route { grid-template-columns: 1fr; grid-template-rows: 1fr auto auto auto; padding: clamp(4rem, 10vh, 6rem) var(--v-gutter) clamp(2rem, 6vh, 4rem); }
+    .route__big { justify-self: start; text-align: left; align-self: end; padding-bottom: var(--v-4); display: flex; align-items: baseline; gap: var(--v-4); flex-wrap: wrap; }
+    .route__big .big { font-size: clamp(2.6rem, 14vw, 4rem); }
+    .route__big .v-label { margin: 0; max-width: 12rem; }
+    .scale__steps li { font-size: .72rem; }
+    .route__after { justify-content: flex-start; padding-top: var(--v-4); }
+  }
+
+  /* ---- цены ------------------------------------------------------------------ */
+  .services { display: grid; grid-template-columns: 1.3fr .9fr; gap: var(--v-9); align-items: start; }
+  .tariff { display: grid; border-top: 1px solid var(--v-hair-strong); }
+  .tariff__row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--v-4); align-items: baseline; padding: var(--v-4) 0; border-bottom: 1px solid var(--v-hair); }
+  .tariff__row--head { padding: var(--v-3) 0; }
+  .tariff__row--head span { font-size: var(--v-t-xs); color: var(--v-ink-soft); font-weight: 500; }
+  .tariff__row > span:first-child { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-base); }
+  .tariff__row .price { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-base); color: var(--v-accent); white-space: nowrap; }
+  .services__incl { font-size: var(--v-t-sm); color: var(--v-ink-soft); max-width: 60ch; }
+  .services__incl b { color: var(--v-ink); font-weight: 600; }
+  .services__list li { display: grid; grid-template-columns: 1fr auto; gap: var(--v-2) var(--v-6); padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); }
+  .services__list li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .services__list h3 { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); }
+  .services__list p { grid-column: 1; color: var(--v-ink-soft); font-size: var(--v-t-sm); max-width: 44ch; }
+  .services__list .price { grid-row: 1 / span 2; grid-column: 2; align-self: start; font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); color: var(--v-accent); white-space: nowrap; text-align: right; }
+  .services__fig { position: relative; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2), var(--v-edge); aspect-ratio: 3 / 4; position: sticky; top: var(--v-8); }
+  .services__fig img { width: 100%; height: 100%; object-fit: cover; }
+  .services__fig figcaption { position: absolute; left: var(--v-5); bottom: var(--v-5); right: var(--v-5); font-size: var(--v-t-sm); z-index: 1; }
+  .services__fig::after { content: ""; position: absolute; inset: auto 0 0 0; height: 55%; background: linear-gradient(to top, rgb(0 0 0 / .85), rgb(0 0 0 / .4) 50%, transparent); }
+  @media (max-width: 860px) {
+    .services { grid-template-columns: 1fr; gap: var(--v-7); }
+    .services__fig { aspect-ratio: 4 / 3; position: static; }
+    .tariff__row { grid-template-columns: 1.2fr 1fr 1fr; gap: var(--v-3); }
+    .tariff__row .price, .tariff__row > span:first-child { font-size: var(--v-t-sm); }
+    .services__list li { grid-template-columns: 1fr; gap: var(--v-1); }
+    .services__list .price { grid-row: auto; grid-column: 1; font-size: var(--v-t-base); text-align: left; }
+  }
+
+  /* ---- что случилось: сцена с репликами ------------------------------------- */
+  .situ__img img { width: 112%; height: 112%; left: -6%; top: -6%; object-fit: cover; }
+  .situ__copy { max-width: 44rem; }
+  .situ__copy .v-display { font-size: clamp(2rem, 1.3rem + 3vw, 4rem); text-wrap: balance; }
+  .situ__copy p { margin-top: var(--v-4); font-size: var(--v-t-lg); line-height: 1.4; max-width: 36ch; color: var(--v-ink); opacity: .88; }
+  @media (max-width: 860px) { .situ__img img { object-position: 70% 50%; } .situ__copy p { font-size: var(--v-t-base); } }
+
+  /* ---- обещания -------------------------------------------------------------- */
+  .promise { display: grid; grid-template-columns: 1fr 1fr; gap: var(--v-8); align-items: center; }
+  .promise__facts li { padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); display: grid; gap: var(--v-1); }
+  .promise__facts li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .promise__facts strong { font-weight: 600; font-size: var(--v-t-lg); }
+  .promise__facts span { color: var(--v-ink-soft); font-size: var(--v-t-sm); }
+  .promise__fig { border-radius: var(--v-radius); overflow: hidden; aspect-ratio: 16 / 10; box-shadow: var(--v-e2); }
+  .promise__fig img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 860px) { .promise { grid-template-columns: 1fr; } }
+
+  /* ---- финал: звонок --------------------------------------------------------- */
+  .close { min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding: clamp(6rem, 14vh, 9rem) var(--v-gutter) 0;
+    background: radial-gradient(60rem 40rem at calc(var(--v-mx, .5) * 100%) calc(var(--v-my, .5) * 100%), rgb(242 169 59 / .2), transparent 60%); }
+  .close__inner { align-self: center; display: grid; grid-template-columns: 1.25fr .75fr; gap: var(--v-9); align-items: end; padding-bottom: var(--v-9); }
+  .close__inner .v-display { margin-bottom: var(--v-5); }
+  .close__tel { font-family: var(--v-font-display); font-weight: 700; font-size: clamp(1.45rem, .7rem + 3vw, 3.6rem); letter-spacing: -.02em; text-decoration: none; white-space: nowrap;
+    display: inline-flex; align-items: center; min-height: 44px; margin-bottom: var(--v-6); }
+  .v-page .close__alt { margin-top: var(--v-5); color: var(--v-ink-soft); font-size: var(--v-t-sm); }
+  .close__alt a { color: var(--v-ink); text-underline-offset: .25em; display: inline-flex; min-height: 44px; align-items: center; padding: 0 .2em; }
+  .close__meta { display: grid; gap: var(--v-4); }
+  .close__meta div { display: grid; gap: .2em; padding-top: var(--v-3); border-top: 1px solid var(--v-hair); }
+  .close__meta dt { font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  .close__meta dd { font-weight: 600; margin: 0; }
+  .foot { display: flex; justify-content: space-between; gap: var(--v-4); padding: var(--v-6) 0; border-top: 1px solid var(--v-hair); font-size: var(--v-t-xs); color: var(--v-ink-soft); flex-wrap: wrap; }
+  @media (max-width: 860px) {
+    .close { min-height: 0; padding-top: clamp(5rem, 12vh, 7rem); }
+    .close__inner { grid-template-columns: 1fr; gap: var(--v-7); padding-bottom: var(--v-8); }
+    .foot { padding-bottom: calc(var(--v-6) + 5.5rem); }
+  }
+
+  /* ---- телефон: кнопка звонка всегда под пальцем ------------------------------ */
+  .callbar { display: none; }
+  @media (max-width: 860px) {
+    .callbar { display: flex; position: fixed; z-index: 40; left: var(--v-3); right: var(--v-3); bottom: calc(var(--v-3) + env(safe-area-inset-bottom));
+      justify-content: center; min-height: 3.6rem; font-size: var(--v-t-base); box-shadow: 0 10px 30px rgb(0 0 0 / .5); }
+    .hero__cta .call { display: none; }
+  }
+
+  .call:focus-visible, .v-btn:focus-visible, a:focus-visible { outline: 2px solid var(--v-accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="v-page">
+  <span data-v-progress></span>
+  <div class="v-grain" aria-hidden="true"></div>
+
+  <header class="bar">
+    <a class="bar__mark" href="#top"><i aria-hidden="true"></i><span class="slot" data-slot="компания">Эвакуатор</span></a>
+    <nav class="bar__right" aria-label="Быстрые ссылки">
+      <a class="bar__tel slot" href="tel:{{телефон}}" data-goal="call" data-slot="телефон">+375 29 000-00-00</a>
+      <a class="v-btn" href="tel:{{телефон}}" data-goal="call">Позвонить</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- 1 · УЗНАВАНИЕ: ночная обочина, эвакуатор уже здесь -->
+    <section data-v-act="pin" data-v-span="2.4" data-v-drift="#0b0d11" aria-label="Эвакуатор, цену называем до выезда">
+      <div data-v-stage>
+        <div class="v-layer hero__back" data-v-parallax="-0.9">
+          <picture>
+            <source media="(max-width: 860px)" srcset="assets/hero-m.webp">
+            <img src="assets/hero.webp" alt="" width="1920" height="1080" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="v-layer hero__card" data-v-parallax="-0.3">
+          <picture>
+            <source media="(max-width: 600px)" srcset="assets/card-480.webp">
+            <img src="assets/card-900.webp" alt="" width="900" height="1200" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__floor" aria-hidden="true"></div>
+        <div class="v-scrim v-scrim--lead" aria-hidden="true"></div>
+
+        <div class="hero__note" data-v-cue="0 0.6 0" data-v-rise="0">
+          <span class="v-label">Принимаем вызовы</span>
+          <b class="slot" data-slot="часы">круглосуточно</b>
+          <span>Подача <span class="slot" data-slot="время-подачи">от 30 минут</span></span>
+        </div>
+
+        <div class="v-copy v-copy--lead hero__copy" data-v-cue="0 0.82 0">
+          <span class="demo-for">Демо для velichaishiq<span class="demo-for__order"> · по заказу «Создание сайта + реклама Яндекс.Директ для эвакуатора»</span></span>
+          <h1 class="v-display v-display--xl" data-v-kinetic="lines">Эвакуатор в <span class="slot" data-slot="город">Минске</span> – цену называем до выезда</h1>
+          <p class="v-lede">Скажите, где стоит машина и что случилось. Назовём стоимость и время подачи сразу, по телефону, – на месте цена не меняется.</p>
+          <div class="hero__cta">
+            <a class="v-btn call" href="tel:{{телефон}}" data-goal="call"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>Позвонить</a>
+            <a class="hero__num slot" href="tel:{{телефон}}" data-goal="call" data-slot="телефон">+375 29 000-00-00</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · ПОВОРОТ: что происходит после звонка (фирменный ход) -->
+    <section data-v-act="pin" data-v-span="2.4" data-v-drift="#0e1219" id="zvonok" aria-label="Что происходит после звонка">
+      <div data-v-stage>
+        <div class="route">
+          <div class="route__copy">
+            <div data-v-cue="0 0.34 0 0.04">
+              <h2 class="v-display v-display--md">Вы звоните и говорите, где машина</h2>
+              <p class="v-body">Адрес или ориентир, марка и что случилось: <b>не заводится, после ДТП, заблокированы колёса</b>. Больше ничего не нужно.</p>
+            </div>
+            <div data-v-cue="0.32 0.68 0.04 0.04">
+              <h2 class="v-display v-display--md">Сразу называем цену и время подачи</h2>
+              <p class="v-body">До выезда, в этом же разговоре. <b>Эта сумма и будет в чеке</b> – водитель на месте её не меняет.</p>
+            </div>
+            <div data-v-cue="0.66 1 0.04 0">
+              <h2 class="v-display v-display--md">Грузим и везём, куда скажете</h2>
+              <p class="v-body">Машину заводим на платформу лебёдкой, <b>колёса крепим ремнями</b>, за подвеску и бампер не цепляем. В сервис, в гараж или к дому.</p>
+            </div>
+          </div>
+
+          <div class="route__big" aria-hidden="true">
+            <span class="big">1 звонок</span>
+            <span class="v-label">и вы знаете цену и когда приедет эвакуатор</span>
+          </div>
+
+          <div class="scale" aria-hidden="true">
+            <div class="scale__line"></div>
+            <div class="scale__fill"></div>
+            <ul class="scale__steps">
+              <li>Звонок</li><li>Цена</li><li>Выезд</li><li>Погрузка</li><li>Доставка</li>
+            </ul>
+            <div class="scale__mark"></div>
+          </div>
+
+          <div class="route__after">
+            <a class="v-btn" href="tel:{{телефон}}" data-goal="call" data-v-cue="0.7 1 0.05 0">Позвонить</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · ВЫБОР: цены -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#0b0d11" id="ceny" aria-label="Цены">
+      <div class="v-wrap services">
+        <div class="v-stack" data-v-in data-v-stagger="60">
+          <h2 class="v-display v-display--lg">Сколько стоит эвакуация</h2>
+          <p class="v-body v-soft">По городу – фиксированная цена за вызов, за городом добавляется километраж от границы города. Точную сумму называем по телефону, до выезда.</p>
+
+          <div class="tariff" role="table" aria-label="Стоимость эвакуации по типу машины">
+            <div class="tariff__row tariff__row--head" role="row"><span role="columnheader">Машина</span><span role="columnheader">По городу</span><span role="columnheader">За городом, за км</span></div>
+            <div class="tariff__row" role="row"><span role="cell">Легковая</span><span class="price v-nums slot" role="cell" data-slot="цена">от … BYN</span><span class="price v-nums slot" role="cell" data-slot="цена-за-км">… BYN</span></div>
+            <div class="tariff__row" role="row"><span role="cell">Кроссовер, внедорожник</span><span class="price v-nums slot" role="cell" data-slot="цена">от … BYN</span><span class="price v-nums slot" role="cell" data-slot="цена-за-км">… BYN</span></div>
+            <div class="tariff__row" role="row"><span role="cell">Микроавтобус до 3,5 т</span><span class="price v-nums slot" role="cell" data-slot="цена">от … BYN</span><span class="price v-nums slot" role="cell" data-slot="цена-за-км">… BYN</span></div>
+          </div>
+          <p class="services__incl"><b>В цену вызова входит:</b> подача, погрузка лебёдкой, крепление ремнями и доставка по адресу в пределах города.</p>
+
+          <ul class="services__list">
+            <li><h3>Заблокированы колёса или руль</h3><p>Машина на парковке, не снимается с передачи, нет ключа. Скажите при звонке – возьмём подкатные тележки.</p><span class="price v-nums slot" data-slot="цена">+… BYN</span></li>
+            <li><h3>После ДТП</h3><p>Грузим машину, которая не катится сама. Дождёмся оформления, если нужно.</p><span class="price v-nums slot" data-slot="цена">от … BYN</span></li>
+            <li><h3>Ожидание на месте</h3><p>Если погрузку приходится ждать, сколько стоит ожидание, тоже говорим заранее.</p><span class="price v-nums slot" data-slot="цена">… BYN / час</span></li>
+          </ul>
+        </div>
+        <figure class="services__fig" data-v-reveal="up" data-v-reveal-at="0.12 0.45">
+          <img src="assets/deck.webp" alt="Платформа эвакуатора опущена для погрузки" width="1200" height="1600" loading="lazy" decoding="async">
+          <figcaption>Платформа опускается до асфальта – низкую машину заводим без царапин</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 4 · УЗНАВАНИЕ СВОЕГО СЛУЧАЯ -->
+    <section data-v-act="pin" data-v-span="2.6" data-v-drift="#0d1016" aria-label="С чем приезжаем">
+      <div data-v-stage>
+        <div class="v-layer situ__img" data-v-parallax="-0.5">
+          <img src="assets/situ.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+        </div>
+        <div class="v-scrim v-scrim--lead" aria-hidden="true"></div>
+        <div class="v-copy v-copy--lead situ__copy" data-v-cue="0 0.28 0 0.05">
+          <h2 class="v-display">Не заводится и не едет</h2>
+          <p>Сел аккумулятор, заглох на трассе, загорелся чек. Довезём до сервиса, который вы назовёте.</p>
+        </div>
+        <div class="v-copy v-copy--lead situ__copy" data-v-cue="0.27 0.53 0.05 0.05">
+          <h2 class="v-display">После ДТП</h2>
+          <p>Машина не на ходу – заберём с места аварии, когда оформите документы.</p>
+        </div>
+        <div class="v-copy v-copy--lead situ__copy" data-v-cue="0.52 0.78 0.05 0.05">
+          <h2 class="v-display">Колёса заблокированы</h2>
+          <p>Ручник, коробка или руль на замке – погрузим на подкатных тележках.</p>
+        </div>
+        <div class="v-copy v-copy--lead situ__copy" data-v-cue="0.77 1 0.05 0">
+          <h2 class="v-display">Между городами</h2>
+          <p>Перевезём машину по <span class="slot" data-slot="зона-выезда">всей Беларуси</span>. Цена за маршрут – до выезда.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · ОБЕЩАНИЕ -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#0b0d11" aria-label="Что обещаем">
+      <div class="v-wrap promise">
+        <figure class="promise__fig" data-v-reveal="left" data-v-reveal-at="0.15 0.5">
+          <img src="assets/road.webp" alt="Эвакуатор везёт машину по ночной трассе" width="1600" height="900" loading="lazy" decoding="async">
+        </figure>
+        <div class="v-stack" data-v-in data-v-stagger="70">
+          <h2 class="v-display v-display--md">Что обещаем</h2>
+          <ul class="promise__facts">
+            <li><strong>Цена до выезда</strong><span>Называем сумму по телефону. Та же сумма будет в чеке.</span></li>
+            <li><strong>Колёса на ремнях</strong><span>Машина стоит на платформе ровно, крепим за колёса, а не за подвеску.</span></li>
+            <li><strong>Говорим, когда выехали</strong><span>Перезваниваем, когда эвакуатор в пути, и называем, через сколько будем.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · ДЕЙСТВИЕ: звонок -->
+    <section data-v-act="flow" data-v-drift="#0b0d11" id="vyzov" aria-label="Вызвать эвакуатор">
+      <div class="close" data-v-spotlight>
+        <div class="close__inner">
+          <div data-v-in data-v-stagger="80">
+            <h2 class="v-display v-display--lg">Машина встала? Позвоните</h2>
+            <a class="close__tel slot" href="tel:{{телефон}}" data-goal="call" data-slot="телефон">+375 29 000-00-00</a>
+            <div><a class="v-btn call" href="tel:{{телефон}}" data-goal="call" data-v-magnet="0.22"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>Позвонить</a></div>
+            <p class="close__alt">Не можете говорить? Напишите в <a href="{{ссылка-viber}}" rel="noopener">Viber</a> или <a href="{{ссылка-telegram}}" rel="noopener">Telegram</a> и пришлите геолокацию.</p>
+          </div>
+          <dl class="close__meta" data-v-in data-v-stagger="60">
+            <div><dt>Принимаем вызовы</dt><dd class="slot" data-slot="часы">круглосуточно</dd></div>
+            <div><dt>Подача</dt><dd class="slot" data-slot="время-подачи">от 30 минут по городу</dd></div>
+            <div><dt>Где работаем</dt><dd><span class="slot" data-slot="город">Минск</span> и <span class="slot" data-slot="зона-выезда">вся Беларусь</span></dd></div>
+          </dl>
+        </div>
+        <footer class="foot">
+          <span><span class="slot" data-slot="юрлицо">ИП Фамилия И. О.</span>, УНП <span class="slot" data-slot="УНП">000000000</span></span>
+          <span>Эвакуация легковых, кроссоверов и микроавтобусов до 3,5 т</span>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <a class="v-btn call callbar" href="tel:{{телефон}}" data-goal="call"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>Позвонить</a>
+</div>
+
+<script src="vibe.js"></script>
+<script>
+  Vibe.mount(document.querySelector('.v-page'));
+
+  // Шапка: подложка после 40 px прокрутки.
+  (function () {
+    var bar = document.querySelector('.bar'), on = null;
+    function tick() { var s = window.scrollY > 40; if (s !== on) { on = s; bar.classList.toggle('is-scrolled', s); } }
+    window.addEventListener('scroll', tick, { passive: true }); tick();
+  })();
+
+  // Фирменный ход: этапы на шкале подсвечиваются по мере прогресса акта.
+  (function () {
+    var act = document.getElementById('zvonok'), steps = act.querySelectorAll('.scale__steps li');
+    var last = -1, live = false;
+    function tick() {
+      var p = parseFloat(getComputedStyle(act).getPropertyValue('--v-p')) || 0;
+      var n = Math.round(p * (steps.length - 1));
+      if (n !== last) { last = n; steps.forEach(function (s, i) { s.classList.toggle('is-past', i <= n); }); }
+      if (live) requestAnimationFrame(tick);
+    }
+    new IntersectionObserver(function (es) { live = es[0].isIntersecting; if (live) tick(); }).observe(act);
+    tick();
+  })();
+
+  // Цель для Директа «Оплата за конверсии»: клик по любой ссылке на телефон.
+  // Номер счётчика Метрики подставляется в {{метрика}} при подключении.
+  (function () {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-goal="call"]');
+      if (a && typeof window.ym === 'function') window.ym('{{метрика}}', 'reachGoal', 'call');
+    });
+  })();
+</script>
+</body>
+</html>
