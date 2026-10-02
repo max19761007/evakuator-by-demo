@@ -29,7 +29,7 @@
     --v-canvas: #0b0d11; --v-surface: #141821;
     --v-ink: #f1ede4; --v-ink-soft: #9d9a92;
     --v-accent: #f2a93b; --v-accent-ink: #16110a;
-    --v-font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+    --v-font-display: "Unbounded", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
     --v-font-text: "Manrope", "Segoe UI", system-ui, sans-serif;
     --v-shadow-color: 4 6 12;
   }
@@ -200,6 +200,46 @@
   }
 
   .call:focus-visible, .v-btn:focus-visible, a:focus-visible { outline: 2px solid var(--v-accent); outline-offset: 3px; }
+
+  /* ---- телефоны: крупный текст в настройках, узкие экраны -------------------- */
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .v-page :is(h1, h2, h3) { overflow-wrap: break-word; hyphens: auto; }
+  .v-page .v-k { max-width: 100%; }
+  @media (max-width: 480px) {
+    .v-page .hero__copy .v-display { font-size: min(var(--v-t-2xl), 8.4vw); }
+    .v-page .situ__copy .v-display { font-size: min(2rem, 8.4vw); }
+    .v-page .route__copy .v-display { font-size: min(1.7rem, 7vw); }
+    .v-page .close__tel { font-size: min(1.45rem, 6.6vw); }
+    .bar__mark { font-size: min(.85rem, 3.8vw); }
+    .bar .v-btn { font-size: min(.8rem, 3.6vw); flex: none; }
+  }
+
+  /* «Уменьшить движение» / «Убрать анимацию» (на Android включается с энергосбережением) и печать:
+     движок показывает все реплики сцены сразу, и они ложатся друг на друга. Раскладываем их лентой. */
+  @media (prefers-reduced-motion: reduce), print {
+    /* 2 · что происходит после звонка: три шага одной колонкой, шкала заполнена */
+    .v-page #zvonok, .v-page #situ { height: auto; }
+    .v-page #zvonok [data-v-stage], .v-page #situ [data-v-stage] { position: relative; height: auto; overflow: hidden; }
+    .v-page .route { height: auto; grid-template-rows: auto; row-gap: var(--v-6); padding-block: 6rem 4rem; }
+    .v-page .route__copy { gap: var(--v-6); }
+    .v-page .route__copy > div { grid-area: auto; }
+    .v-page .scale__fill { width: calc(100% - 2 * var(--edge)); }
+    .v-page .scale__mark { left: calc(100% - var(--edge)); transform: none; }
+    .v-page .scale__steps li { color: var(--v-ink); }
+    .v-page .scale__steps li::before { background: var(--v-accent); }
+    /* 4 · с чем приезжаем: четыре случая друг под другом поверх фото */
+    .v-page #situ [data-v-stage] { padding: 6rem 0 4rem; display: grid; gap: var(--v-7); }
+    .v-page .situ__copy { position: relative; inset: auto; transform: none; margin: 0 var(--v-gutter); }
+    .v-page #situ .v-scrim { background: rgb(11 13 17 / .66); }
+  }
+
+  /* старые браузеры (Safari до iOS 15.4, Chrome до 108, встроенные браузеры приложений) не знают svh */
+  @supports not (height: 100svh) {
+    .v-page [data-v-act="pin"], .v-page [data-v-act="pan"] { height: calc(var(--v-span, 2) * 100vh); }
+    .v-page [data-v-act="pin"] [data-v-stage], .v-page [data-v-act="pan"] [data-v-stage] { height: 100vh; }
+    .close { min-height: 100vh; }
+    @media (max-width: 860px) { .hero__card img { top: 12vh; } .hero__copy { bottom: clamp(5.5rem, 13vh, 7rem); } .close { min-height: 0; } }
+  }
 </style>
 </head>
 <body>
@@ -322,7 +362,7 @@
     </section>
 
     <!-- 4 · УЗНАВАНИЕ СВОЕГО СЛУЧАЯ -->
-    <section data-v-act="pin" data-v-span="2.6" data-v-drift="#0d1016" aria-label="С чем приезжаем">
+    <section data-v-act="pin" data-v-span="2.6" data-v-drift="#0d1016" id="situ" aria-label="С чем приезжаем">
       <div data-v-stage>
         <div class="v-layer situ__img" data-v-parallax="-0.5">
           <img src="assets/situ.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
